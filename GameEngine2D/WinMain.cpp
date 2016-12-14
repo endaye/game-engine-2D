@@ -1,12 +1,21 @@
 ﻿#include "WinMain.h"
 
 //Additional include files
+#ifndef _ENGINE_H
+#include "Engine.h"
+#endif // !_ENGINE_H
+
 #ifndef _STRING_H
 #include "string.h"
 #endif // !_STRING_H
 #ifndef _IOSTREAM_H
 #include "iostream.h"
 #endif // !_IOSTREAM_H
+
+#ifndef _DELETEMACRO_H
+#include "deletemacros.h"
+#endif // !_DELETEMACRO_H
+
 
 #if defined (DEBUG) | defined (_DEBUG)
 int _tmain(int argc, char* argv[])
@@ -38,14 +47,14 @@ int WINAPI WinMain(HINSTANCE hInstance,		//WINAPI是函数约定 //A handle to t
 	_CrtSetBreakAlloc(0);
 #endif
 
-	////Create the engine
-	//Engine* pEngine = new Engine();
+	//Create the engine
+	Engine* pEngine = new Engine();
 
-	////Kick of the game
-	//int result = pEngine->RunLoop();
+	//Kick of the game
+	int result = pEngine->RunLoop();
 
-	////Delete the engine
-	//delete pEngine;
+	//Delete the engine
+	SafeDelete(pEngine);
 
 	//Return result
 	return 0;
