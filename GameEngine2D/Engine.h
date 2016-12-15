@@ -48,13 +48,13 @@ public:
 private:
 
 	int Intialize();	//返回值为int是如果发生错误可以返回error state
-	int Draw(const Context& context);
-	int Update(const Context& context);
+	int Draw(Context& context);
+	int Update(Context& context);
 	int ShutDown();
 
 	//Add a core system to the engine
 	int AddSystem(System* psys);
-	
+
 	//Retrieve a core system from the engine
 	template<typename T>
 	T* GetSystem(SystemType systype)

@@ -1,7 +1,8 @@
 ﻿#include "Engine.h"
 
 //Addisional include files
-#include "System.h"		
+#include "System.h"
+#include "Window.h"
 #include "Game.h"
 
 #include "deletemacros.h"
@@ -76,20 +77,38 @@ int Engine::Intialize()
 	}
 
 	//Add some systems
+	if (!AddSystem(new Window(WindowData(640, 480))))
+	{
+		return false;
+	}
 
+	//Initialize the system
+	if (!m_mapSystems[SystemType::Sys_Window]->Initialize())
+	{
+		return false;
+	}
 
 
 	return true;
 
 }
 
-int Engine::Draw(const Context& context)
+int Engine::Draw(Context& context)
 {
 	return true;
 }
 
-int Engine::Update(const Context& context)
+int Engine::Update(Context& context)
 {
+	for (std::pair<SystemType, System*> pSys : m_mapSystems)
+	{
+		if (!pSys.second)
+		{
+			continue;
+		}
+
+		pSys.second->Update(context);
+	}
 	return true;
 }
 
